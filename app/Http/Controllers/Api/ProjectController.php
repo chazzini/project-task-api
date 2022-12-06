@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->authorizeResource(Project::class, 'project');
+    }
     public function index()
     {
 
