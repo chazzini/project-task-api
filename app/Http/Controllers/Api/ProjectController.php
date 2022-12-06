@@ -25,7 +25,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return new ProjectResource(auth()->user()->projects()->create($request->only('name')));
     }
 
     /**
@@ -47,9 +47,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $project->update($request->only('name'));
+        return new ProjectResource($project);
     }
 
     /**
@@ -58,8 +59,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return response()->noContent();
     }
 }
