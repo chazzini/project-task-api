@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -23,7 +23,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         return new ProjectResource(auth()->user()->projects()->create($request->only('name')));
     }
@@ -47,7 +47,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
         $project->update($request->only('name'));
         return new ProjectResource($project);
