@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
 
-        return ProjectResource::collection(auth()->user()->projects()->get());
+        return ProjectResource::collection(auth()->user()->projects()->paginate(2));
     }
 
     /**
