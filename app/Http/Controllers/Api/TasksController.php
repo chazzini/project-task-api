@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Http\Requests\TaskRequest;
+use App\Policies\TaskPolicy;
 
 class TasksController extends Controller
 {
@@ -19,6 +20,7 @@ class TasksController extends Controller
      */
     public function store(TaskRequest $request)
     {
+        $this->authorize('create', [Task::class, $request->project_id]);
         return Task::create($request->only(['name', 'due_date', 'project_id']));
     }
 
@@ -32,6 +34,7 @@ class TasksController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
+        $this->authorize('update', $task);
         $task::update($request->all());
         return $task;
     }
@@ -44,6 +47,7 @@ class TasksController extends Controller
      */
     public function destroy(Task $task)
     {
+        $this->authorize('delete', $task);
         $task::delete();
         return response()->noContent();
     }
