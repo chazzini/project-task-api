@@ -12,12 +12,12 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Project::class, 'project');
+       // $this->authorizeResource(Project::class, 'project');
     }
     public function index()
     {
 
-        return ProjectResource::collection(auth()->user()->projects()->paginate(2));
+        return ProjectResource::collection(auth()->user()->projects()->with('user')->paginate(2));
     }
 
     /**
