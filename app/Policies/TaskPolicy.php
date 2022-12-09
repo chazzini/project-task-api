@@ -19,10 +19,10 @@ class TaskPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Project $project_id)
+    public function create(User $user, $project_id)
     {
-
-        return $user->id === $project_id->user_id;
+        $project = Project::findorfail($project_id);
+        return $user->id === $project->user_id;
     }
 
     /**
@@ -34,7 +34,8 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        return $user->id === $task->project()->user_id;
+
+        return $user->id === $task->project->user_id;
     }
 
     /**
@@ -46,7 +47,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return $user->id === $task->project()->user_id;
+        return $user->id === $task->project->user_id;
     }
 
 

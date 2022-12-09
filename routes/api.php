@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/authenticate', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-
     Route::apiResource('project', \App\Http\Controllers\Api\ProjectController::class);
     Route::apiResource('task', \App\Http\Controllers\Api\TasksController::class)->except(['index', 'show']);
+    Route::post('upload', [\App\Http\Controllers\Api\FilesController::class, 'store']);
 });
