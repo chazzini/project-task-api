@@ -1,6 +1,6 @@
 # Building Projects and Task Api with Laravel includeing documentation
 
-This project is built using Laravel  php most popular framework to show case it power to build api, as well as a pass time for me also.
+This project is built using Laravel  php most popular framework to show case it's power to the  building of  apis, as well as a pass time for me also.
 
 ## Why use Laravel
 
